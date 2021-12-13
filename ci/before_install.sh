@@ -53,7 +53,7 @@ netbsd_install() {
 }
 
 linux_install() {
-	gem install mustache
+	sudo gem install mustache
 }
 
 crossplat_install() {

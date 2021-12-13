@@ -1,10 +1,14 @@
-name: C/C++ CI
+name: Tests
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+env:
+  CMOCKA_INSTALL: "$HOME/builds/cmocka-install"
+  CHECKPATCH_INSTALL: "$HOME/builds/checkpatch-install"
+  LOGNAME: "GitHub_Action" # TODO: needed? orig. from travis ci
 
 jobs:
   build:
@@ -12,12 +16,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        run: ./ci/before_install.sh
+      - name: Install more prerequisites
+        run: ./ci/install.sh
+      - name: Configure
+        run: |
+          ./autogen.sh
+          ./configure --enable-tests
+      - name: Build
+        run: ./ci/main.sh
+      - name: Check patch
+        run: ./ci/checkpatch.sh
