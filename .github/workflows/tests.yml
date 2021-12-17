@@ -5,8 +5,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-env:
-  LOGNAME: "GitHub_Action" # TODO: needed? orig. from travis ci
 
 jobs:
   build:
@@ -16,14 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up environment
-        run: ./ci/before_install.sh
+        run: |
+          echo CMOCKA_INSTALL="${HOME}/builds/cmocka-install" >> "${GITHUB_ENV}"
+          ./ci/before_install.sh
       - name: Install more prerequisites
-        run: ./ci/install.sh
+        run: ./ci/install.sh cmocka libnereon
       - name: Configure
         run: |
           ./autogen.sh
           ./configure --enable-tests
       - name: Build
         run: ./ci/main.sh
-      - name: Check patch
-        run: ./ci/checkpatch.sh
