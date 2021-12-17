@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -ex
 
 # https://gist.github.com/marcusandre/4b88c2428220ea255b83
@@ -56,6 +56,10 @@ linux_install() {
 	sudo gem install mustache
 }
 
+msys_install() {
+	gem install mustache
+}
+
 crossplat_install() {
 	echo ""
 }
@@ -72,6 +76,8 @@ main() {
 			macos_install ;;
 		linux*)
 			linux_install ;;
+		msys*)
+			msys_install ;;
 		*) echo "unknown"; exit 1 ;;
 	esac
 
