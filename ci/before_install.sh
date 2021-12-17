@@ -61,6 +61,7 @@ linux_install() {
 
 msys_install() {
 	packages=(
+		mingw64/mingw-w64-x86_64-graphviz # for doxygen's dot component
 		doxygen
 	)
 	pacman --noconfirm -S --needed "${packages[@]}"
