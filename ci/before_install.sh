@@ -57,6 +57,10 @@ linux_install() {
 }
 
 msys_install() {
+	packages=(
+		doxygen
+	)
+	pacman --noconfirm -S --needed "${packages[@]}"
 	gem install mustache
 }
 
