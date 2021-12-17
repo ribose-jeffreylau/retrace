@@ -48,8 +48,8 @@ function checkpatch() {
 #
 # NOTE: $GITHUB_HEAD_REF is only set for pull requests.
 # See: https://docs.github.com/en/actions/learn-github-actions/environment-variables
-if [[ "$TRAVIS_PULL_REQUEST" == "false" ]] || \
-   [[ -n "$GITHUB_HEAD_REF" ]]; then
+if [[ "${TRAVIS_PULL_REQUEST:-}" == "false" ]] || \
+   [[ -n "${GITHUB_HEAD_REF:-}" ]]; then
 	checkpatch HEAD
 else
 	for c in $(git rev-list HEAD^1..HEAD^2); do
