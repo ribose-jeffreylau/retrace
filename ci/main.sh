@@ -11,7 +11,7 @@ export LD_LIBRARY_PATH CFLAGS LDFLAGS
 sh autogen.sh && \
 	./configure \
 		--disable-silent-rules \
-		--with-cmocka=${CMOCKA_INSTALL} \
+		--with-cmocka="${CMOCKA_INSTALL}" \
 		--enable-tests && \
 	make clean && \
 	make

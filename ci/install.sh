@@ -20,17 +20,17 @@ if [ ! -e "${CMOCKA_INSTALL}/lib/libcmocka.so" ] && [ ! -e "${CMOCKA_INSTALL}/li
 		-DLIB_INSTALL_DIR="${CMOCKA_INSTALL}/lib" \
 		-DINCLUDE_INSTALL_DIR="${CMOCKA_INSTALL}/include" \
 		~/builds/cmocka
-	make -j${CORES} all install
+	make -j"${CORES}" all install
 fi
 
 # checkpatch.pl
 if [ ! -e "${CHECKPATCH_INSTALL}/checkpatch.pl" ]; then
-	mkdir -p ${CHECKPATCH_INSTALL}
-	cd ${CHECKPATCH_INSTALL}
+	mkdir -p "${CHECKPATCH_INSTALL}"
+	cd "${CHECKPATCH_INSTALL}"
 	wget https://raw.githubusercontent.com/torvalds/linux/master/scripts/checkpatch.pl
 	chmod a+x checkpatch.pl
 	wget https://raw.githubusercontent.com/torvalds/linux/master/scripts/spelling.txt
-	patch -p0 < $SPWD/checkpatch.pl.patch
+	patch -p0 < "$SPWD"/checkpatch.pl.patch
 	echo "invalid.struct.name" > const_structs.checkpatch
 	echo "JSON_Object" > typedefs.checkpatch
 fi

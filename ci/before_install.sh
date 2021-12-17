@@ -3,11 +3,11 @@ set -ex
 
 # https://gist.github.com/marcusandre/4b88c2428220ea255b83
 get_os() {
-	if [ -z $OSTYPE ]; then
-		echo "$(uname | tr '[:upper:]' '[:lower:]')"
+	if [ -z "$OSTYPE" ]; then
+		uname
 	else
-		echo "$(echo $OSTYPE | tr '[:upper:]' '[:lower:]')"
-	fi
+		echo "$OSTYPE"
+	fi | tr '[:upper:]' '[:lower:]'
 }
 
 macos_install() {
@@ -24,9 +24,9 @@ macos_install() {
 		ruby
 	"
 	for p in ${packages}; do
-		brew install ${p} || brew upgrade ${p}
+		brew install "${p}" || brew upgrade "${p}"
 	done
-	mkdir -p ${CMOCKA_INSTALL}
+	mkdir -p "${CMOCKA_INSTALL}"
 	gem install mustache
 }
 
