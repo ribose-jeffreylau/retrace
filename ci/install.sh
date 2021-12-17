@@ -8,7 +8,7 @@ CORES="2" && [ -r /proc/cpuinfo ] && CORES=$(grep -c '^$' /proc/cpuinfo)
 
 # cmocka
 if [ ! -e "${CMOCKA_INSTALL}/lib/libcmocka.so" ] && [ ! -e "${CMOCKA_INSTALL}/lib/libcmocka.dylib" ]; then
-	git clone git://git.cryptomilk.org/projects/cmocka.git ~/builds/cmocka
+	git clone https://git.cryptomilk.org/projects/cmocka.git ~/builds/cmocka
 	cd ~/builds/cmocka
 	git checkout tags/cmocka-1.1.1
 
