@@ -6,8 +6,6 @@ on:
   pull_request:
     branches: [ master ]
 env:
-  CMOCKA_INSTALL: "$HOME/builds/cmocka-install"
-  CHECKPATCH_INSTALL: "$HOME/builds/checkpatch-install"
   LOGNAME: "GitHub_Action" # TODO: needed? orig. from travis ci
 
 jobs:

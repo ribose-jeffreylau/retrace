@@ -61,6 +61,8 @@ crossplat_install() {
 }
 
 main() {
+	echo CMOCKA_INSTALL="${HOME}/builds/cmocka-install" >> "${GITHUB_ENV}"
+	echo CHECKPATCH_INSTALL="${HOME}/builds/checkpatch-install" >> "${GITHUB_ENV}"
 	case $(get_os) in
 		freebsd*)
 			freebsd_install ;;
