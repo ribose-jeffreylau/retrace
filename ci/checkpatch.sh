@@ -52,10 +52,16 @@ checkpatch() {
 # NOTE: $GITHUB_HEAD_REF is only set for pull requests.
 # See: https://docs.github.com/en/actions/learn-github-actions/environment-variables
 if [[ "${TRAVIS_PULL_REQUEST:-}" == "false" ]] || \
-   [[ -n "${GITHUB_HEAD_REF:-}" ]]; then
+   [[ -z "${GITHUB_HEAD_REF:-}" ]]; then
 	checkpatch HEAD
-else
+
+# XXX: HEAD^2 seems to only makes sense for merge commits
+elif git show --format=short | head -n2 | grep -q ^Merge:
+then
 	while read -r c; do
 		checkpatch "$c"
 	done < <(git rev-list HEAD^1..HEAD^2)
+else
+	>&2 echo "Warning: this should not be run."
+	exit 1
 fi
