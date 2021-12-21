@@ -62,7 +62,8 @@ linux_install() {
 
 msys_install() {
 	packages=(
-		mingw64/mingw-w64-x86_64-ninja
+		mingw-w64-x86_64-cmocka
+		# mingw64/mingw-w64-x86_64-ninja
 		mingw64/mingw-w64-x86_64-cmake
 		mingw64/mingw-w64-x86_64-graphviz # for doxygen's dot component
 		doxygen

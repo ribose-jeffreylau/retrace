@@ -39,7 +39,7 @@ jobs:
         shell: msys2 {0}
         run: |
           ./ci/before_install.sh
-          ./ci/install.sh cmocka libnereon
+          ./ci/install.sh libnereon
       - name: Configure
         shell: msys2 {0}
         run: |
