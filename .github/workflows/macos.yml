@@ -40,6 +40,9 @@ jobs:
       - name: Configure
         run: |
           ./autogen.sh
+          export PKG_CONFIG_PATH="$(brew --prefix)/opt/openssl@1.1/lib/pkgconfig"
+          export LDFLAGS="-L$(brew --prefix)/opt/openssl@1.1/lib"
+          export CPPFLAGS="-I$(brew --prefix)/opt/openssl@1.1/include"
           ./configure --enable-tests
       - name: Build
         run: ./ci/main.sh
