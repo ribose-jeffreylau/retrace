@@ -19,6 +19,7 @@ macos_install() {
 	done
 
 	brew update-reset
+	brew uninstall openssl
 	brew bundle
 	mkdir -p "${CMOCKA_INSTALL}"
 	brew link --force openssl
