@@ -11,6 +11,8 @@ on:
       - '**.md'
       - '.github/workflows/*.yml'
       - '!.github/workflows/macos.yml'
+      - 'ci/before_install/*'
+      - '!ci/before_install/darwin.sh'
   pull_request:
     paths-ignore:
       - 'docs/**'
