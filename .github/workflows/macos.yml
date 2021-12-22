@@ -40,9 +40,11 @@ jobs:
       - name: Configure
         run: |
           ./autogen.sh
-          export PKG_CONFIG_PATH="$(brew --prefix)/opt/openssl@1.1/lib/pkgconfig"
-          export LDFLAGS="-L$(brew --prefix)/opt/openssl@1.1/lib"
-          export CPPFLAGS="-I$(brew --prefix)/opt/openssl@1.1/include"
+          # see: https://github.com/oracle/truffleruby/commit/2706c09e57c4c27fb6177a9e420a87c0befb9e70
+          export OPENSSL_PREFIX="$(brew --prefix)/opt/openssl@1.1"
+          export PKG_CONFIG_PATH="${OPENSSL_PREFIX}/lib/pkgconfig"
+          export LDFLAGS="-L${OPENSSL_PREFIX}/opt/openssl@1.1/lib"
+          export CPPFLAGS="-I${OPENSSL_PREFIX}/opt/openssl@1.1/include"
           ./configure --enable-tests
       - name: Build
         run: ./ci/main.sh
