@@ -8,6 +8,16 @@ freebsd-11-2-task:
     CMOCKA_INSTALL: $PWD/builds/cmocka-install
     CHECKPATCH_INSTALL: $PWD/builds/checkpatch-install
 
+  user_setup_script: |
+    # workaround 'pkg: repository meta has wrong version 2'
+    env ASSUME_ALWAYS_YES=yes pkg bootstrap -f
+    # Use bash for the CI scripts
+    pkg install -y bash
+    # Work around 'rl_executing_keyseq' bug with bash 5:
+    # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=245191
+    ldconfig -r | grep libreadline
+    rm /lib/libreadline.so.8
+
   install_script:
     - ./ci/before_install.sh
   script:
@@ -23,6 +33,15 @@ freebsd-12-task:
     MD5SUM: /sbin/md5sum
     CMOCKA_INSTALL: $PWD/builds/cmocka-install
     CHECKPATCH_INSTALL: $PWD/builds/checkpatch-install
+
+  user_setup_script: |
+    # workaround 'pkg: repository meta has wrong version 2'
+    env ASSUME_ALWAYS_YES=yes pkg bootstrap -f
+    # Use bash for the CI scripts
+    pkg install -y bash
+    # Work around 'rl_executing_keyseq' bug with bash 5:
+    # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=245191
+    bash -c true || {  ldconfig -r | grep libreadline | head -n1 | awk '{print $3}' | xargs rm ; }
 
   install_script:
     - ./ci/before_install.sh
