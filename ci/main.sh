@@ -8,6 +8,10 @@ CFLAGS="-I${CMOCKA_INSTALL}/include"
 export LD_LIBRARY_PATH CFLAGS LDFLAGS
 
 install_retrace() {
+	# DEBUG:
+	echo printing /usr/include/x86_64-linux-gnu/sys/time.h
+	cat /usr/include/x86_64-linux-gnu/sys/time.h
+	echo printed /usr/include/x86_64-linux-gnu/sys/time.h
 	sh autogen.sh && \
 		./configure \
 			--disable-silent-rules \
